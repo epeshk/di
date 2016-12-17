@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{717BF414-680B-4273-B879-1F8EE92048DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TagsCloudVisualization</RootNamespace>
+    <AssemblyName>TagsCloudVisualization</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageSaver\IImageSaver.cs" />
+    <Compile Include="ImageSaver\PngImageSaver.cs" />
+    <Compile Include="Settings\CircularCloudLayouterSettings.cs" />
+    <Compile Include="RectangleLayouter\CircularCloudLayouter.cs" />
+    <Compile Include="RectangleLayouter\CircularPointsSequence.cs" />
+    <Compile Include="Settings\DrawingSettings.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="Settings\FileSettings.cs" />
+    <Compile Include="ImageDrawer\IImageDrawer.cs" />
+    <Compile Include="RectangleLayouter\IRectangleLayouter.cs" />
+    <Compile Include="Statistics\IStatisticsProvider.cs" />
+    <Compile Include="CloudCreator\ITagsCloudCreator.cs" />
+    <Compile Include="WordsPreprocessings\IWordsPreprocessing.cs" />
+    <Compile Include="WordsSources\IWordsSource.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="WordsPreprocessings\LowercaseWords.cs" />
+    <Compile Include="Properties\FriendAssemblies.cs" />
+    <Compile Include="WordsPreprocessings\RemoveShortWords.cs" />
+    <Compile Include="Statistics\StatisticsProvider.cs" />
+    <Compile Include="StringMeasurer.cs" />
+    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="ImageDrawer\ImageDrawer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CloudCreator\TagsCloudCreator.cs" />
+    <Compile Include="WordsSources\TxtFileWordsSource.cs" />
+    <Compile Include="Vector.cs" />
+    <Compile Include="Word.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
