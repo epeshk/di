@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using ResultOf;
 using TagsCloudVisualization.Extensions;
 using TagsCloudVisualization.Settings;
 
@@ -16,7 +17,7 @@ namespace TagsCloudVisualization.ImageDrawer
             this.settings = settings;
         }
 
-        public Image Draw(IEnumerable<Word> words)
+        public Result<Image> Draw(IEnumerable<Word> words)
         {
             var bitmap = new Bitmap(settings.ImageSize.Width, settings.ImageSize.Height);
             using (var graphics = Graphics.FromImage(bitmap))

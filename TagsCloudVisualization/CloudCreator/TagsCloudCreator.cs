@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using ResultOf;
 using TagsCloudVisualization.ImageDrawer;
 using TagsCloudVisualization.RectangleLayouter;
 using TagsCloudVisualization.Settings;
@@ -27,7 +28,7 @@ namespace TagsCloudVisualization.CloudCreator
             this.imageDrawer = imageDrawer;
         }
 
-        public Image Create(IEnumerable<KeyValuePair<string, int>> wordStatistics)
+        public Result<Image> Create(IEnumerable<KeyValuePair<string, int>> wordStatistics)
         {
             var wordsArray = wordStatistics.ToArray();
             var maxCount = wordsArray.Select(w => w.Value).Max();

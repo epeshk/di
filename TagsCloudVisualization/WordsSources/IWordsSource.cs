@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using ResultOf;
 
 namespace TagsCloudVisualization.WordsSources
 {
     public interface IWordsSource
     {
-        IEnumerable<string> GetWords();
+        Result<IEnumerable<string>> GetWords();
     }
 }

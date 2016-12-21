@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using ResultOf;
 
 namespace TagsCloudVisualization.WordsPreprocessings
 {
     public interface IWordsPreprocessing
     {
-        IEnumerable<string> Process(IEnumerable<string> wordsSequence);
+        Result<IEnumerable<string>> Process(IEnumerable<string> wordsSequence);
     }
 }

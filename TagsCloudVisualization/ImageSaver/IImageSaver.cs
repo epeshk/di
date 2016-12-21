@@ -1,9 +1,10 @@
 using System.Drawing;
+using ResultOf;
 
 namespace TagsCloudVisualization.ImageSaver
 {
     public interface IImageSaver
     {
-        bool TrySave(Image image);
+        Result<None> TrySave(Image image);
     }
 }
