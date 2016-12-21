@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using ResultOf;
 using TagsCloudVisualization.CloudCreator;
 using TagsCloudVisualization.ImageSaver;
 using TagsCloudVisualization.Statistics;
@@ -32,22 +34,36 @@ namespace TagsCloudVisualization.App.Application
 
         public void Start()
         {
-            var words = wordsSources.Select(s => s.GetWords()).FirstOrDefault(w => w != null);
-            if (words == null)
-            {
-                Console.WriteLine("Can't load input file");
-                Environment.Exit(0);
-            }
+            var words = wordsSources
+                .Select(s => s.GetWords())
+                .FirstOrDefault(w => w.IsSuccess)
+                .FailOnNull("Can't load input file");
+
             foreach (var wordsPreprocessing in preprocessings)
             {
-                words = wordsPreprocessing.Process(words);
+                words = words.Then(w => wordsPreprocessing.Process(w));
             }
-            var statistics = statisticsProvider.GetStatistics(words);
-            var tagCloud = tagsCloudCreator.Create(statistics);
-            if(!imageSavers.Any(saver => saver.TrySave(tagCloud)))
+
+            var tagCloud = words
+                .Then(w => statisticsProvider.GetStatistics(w))
+                .Then(s => tagsCloudCreator.Create(s));
+
+            if (!imageSavers.Any(saver => saver.TrySave(tagCloud)))
             {
                 Console.WriteLine("Can't save result");
             }
         }
     }
+    public static class EnumerableExtensions
+        {
+            public static T FirstOrDefined<T>(this IEnumerable<T> enumerable, Func<T, bool> condition, T defaultValue)
+            {
+                foreach (var element in enumerable)
+                {
+                    if (condition(element))
+                        return element;
+                }
+                return defaultValue;
+            }
+        }
 }

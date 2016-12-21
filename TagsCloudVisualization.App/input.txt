@@ -11,7 +11,7 @@ simple
 and
 easy
 to
-learn.
+learn
 The
 curly-brace
 syntax
@@ -28,7 +28,7 @@ with
 C
 C++
 or
-Java.
+Java
 Developers
 who
 know
@@ -50,7 +50,7 @@ within
 a
 very
 short
-time.
+time
 C#
 syntax
 simplifies
@@ -82,7 +82,7 @@ are
 not
 found
 in
-Java.
+Java
 C#
 supports
 generic
@@ -116,7 +116,7 @@ to
 use
 by
 client
-code.
+code
 Language-Integrated
 Query
 (LINQ)
@@ -128,7 +128,7 @@ query
 a
 first-class
 language
-construct.
+construct
 As
 an
 object-oriented
@@ -141,7 +141,7 @@ of
 encapsulation
 inheritance
 and
-polymorphism.
+polymorphism
 All
 variables
 and
@@ -158,7 +158,7 @@ are
 encapsulated
 within
 class
-definitions.
+definitions
 A
 class
 may
@@ -175,7 +175,7 @@ implement
 any
 number
 of
-interfaces.
+interfaces
 Methods
 that
 override
@@ -195,7 +195,7 @@ way
 to
 avoid
 accidental
-redefinition.
+redefinition
 In
 C#
 a
@@ -218,7 +218,7 @@ but
 does
 not
 support
-inheritance.
+inheritance
 In
 addition
 to
@@ -251,7 +251,7 @@ delegates
 enable
 type-safe
 event
-notifications.
+notifications
 Properties
 
 serve
@@ -260,7 +260,7 @@ accessors
 for
 private
 member
-variables.
+variables
 Attributes
 
 provide
@@ -270,11 +270,11 @@ about
 types
 at
 run
-time.
+time
 Inline
 XML
 documentation
-comments.
+comments
 Language-Integrated
 Query
 (LINQ)
@@ -288,7 +288,7 @@ a
 variety
 of
 data
-sources.
+sources
 If
 you
 have
@@ -316,7 +316,7 @@ through
 a
 process
 called
-"Interop."
+"Interop"
 Interop
 enables
 C#
@@ -331,7 +331,7 @@ native
 C++
 application
 can
-do.
+do
 C#
 even
 supports
@@ -352,7 +352,7 @@ memory
 access
 is
 absolutely
-critical.
+critical
 The
 C#
 build
@@ -369,7 +369,7 @@ more
 flexible
 than
 in
-Java.
+Java
 There
 are
 no
@@ -388,7 +388,7 @@ declared
 in
 a
 particular
-order.
+order
 A
 C#
 source
@@ -402,4 +402,4 @@ classes
 structs
 interfaces
 and
-events.
+events
