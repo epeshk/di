@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ResultOf;
 
 namespace TagsCloudVisualization.WordsPreprocessings
 {
     public class LowercaseWords : IWordsPreprocessing
     {
-        public IEnumerable<string> Process(IEnumerable<string> wordsSequence)
+        public Result<IEnumerable<string>> Process(IEnumerable<string> wordsSequence)
         {
-            return wordsSequence.Select(word => word.ToLower());
+            return Result.Of(() => wordsSequence.Select(word => word.ToLower()));
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using ResultOf;
 using TagsCloudVisualization.Settings;
 
 namespace TagsCloudVisualization.ImageSaver
@@ -14,12 +15,11 @@ namespace TagsCloudVisualization.ImageSaver
             this.settings = settings;
         }
 
-        public bool TrySave(Image image)
+        public Result<None> TrySave(Image image)
         {
             if (!settings.OutputFile.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                return false;
-            image.Save(settings.OutputFile, ImageFormat.Png);
-            return true;
+                return Result.Fail<None>("Not supported format");
+            return Result.OfAction(() => image.Save(settings.OutputFile, ImageFormat.Png));
         }
     }
 }

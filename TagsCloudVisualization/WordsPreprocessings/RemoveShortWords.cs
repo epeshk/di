@@ -8,7 +8,7 @@ namespace TagsCloudVisualization.WordsPreprocessings
     {
         public Result<IEnumerable<string>> Process(IEnumerable<string> wordsSequence)
         {
-            return wordsSequence.Where(word => word.Length > 3);
+            return Result.Of(() => wordsSequence.Where(word => word.Length > 3));
         }
     }
 }

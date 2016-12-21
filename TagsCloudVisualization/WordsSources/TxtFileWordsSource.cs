@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ResultOf;
 using TagsCloudVisualization.Settings;
 
 namespace TagsCloudVisualization.WordsSources
@@ -14,11 +15,11 @@ namespace TagsCloudVisualization.WordsSources
             this.settings = settings;
         }
 
-        public IEnumerable<string> GetWords()
+        public Result<IEnumerable<string>> GetWords()
         {
             if (!settings.InputFile.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
-                return null;
-            return File.ReadLines(settings.InputFile);
+                return Result.Fail<IEnumerable<string>>("Not supported format");
+            return Result.Of(() => File.ReadLines(settings.InputFile));
         }
     }
 }

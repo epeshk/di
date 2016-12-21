@@ -34,20 +34,27 @@ namespace TagsCloudVisualization.App.Application
 
         public void Start()
         {
-            var words = wordsSources
+            Result.Of(() => wordsSources
                 .Select(s => s.GetWords())
-                .FirstOrDefault(w => w.IsSuccess)
-                .FailOnNull("Can't load input file");
+                .First(w => w.IsSuccess))
+                .OnFail(e =>
+                {
+                    Console.WriteLine("Can't load input file");
+                    Environment.Exit(1);
+                })
+                .Then(words => 
 
             foreach (var wordsPreprocessing in preprocessings)
             {
                 words = words.Then(w => wordsPreprocessing.Process(w));
             }
 
-            var tagCloud = words
+            words
                 .Then(w => statisticsProvider.GetStatistics(w))
-                .Then(s => tagsCloudCreator.Create(s));
+                .Then(s => tagsCloudCreator.Create(s))
+                .Then(image => imageSavers.FirstOrDefined(saver => saver.TrySave(image)))
 
+            
             if (!imageSavers.Any(saver => saver.TrySave(tagCloud)))
             {
                 Console.WriteLine("Can't save result");
