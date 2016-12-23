@@ -11,10 +11,10 @@ namespace TagsCloudVisualization.CloudCreator
 {
     public class TagsCloudCreator : ITagsCloudCreator
     {
-        private readonly DrawingSettings settings;
-        private readonly StringMeasurer measurer;
         private readonly Func<IRectangleLayouter> createRectangleLayouter;
         private readonly IImageDrawer imageDrawer;
+        private readonly StringMeasurer measurer;
+        private readonly DrawingSettings settings;
 
         public TagsCloudCreator(
             DrawingSettings settings,
@@ -31,18 +31,20 @@ namespace TagsCloudVisualization.CloudCreator
         public Result<Image> Create(IEnumerable<KeyValuePair<string, int>> wordStatistics)
         {
             var wordsArray = wordStatistics.ToArray();
-            var maxCount = wordsArray.Select(w => w.Value).Max();
-            var layouter = createRectangleLayouter();
+            var maxCountResult = Result.Of(() => wordsArray.Select(w => w.Value).Max());
+            if (!maxCountResult.IsSuccess)
+                return maxCountResult.ChangeType<int, Image>();
+            var maxCount = maxCountResult.GetValueOrThrow();
 
-            var words = wordsArray.Select(w =>
-            {
-                var font = new Font(settings.FontFamily, GetFontSize(w.Value, maxCount));
-                var size = measurer.BoundRectangleSize(w.Key, font);
-                var rectangle = layouter.PutNextRectangle(size);
-                return new Word(rectangle, font, w.Key);
-            });
-
-            return imageDrawer.Draw(words);
+            return Result.Of(() => createRectangleLayouter())
+                .Then(layouter => wordsArray.Select(w =>
+                {
+                    var font = new Font(settings.FontFamily, GetFontSize(w.Value, maxCount));
+                    var size = measurer.BoundRectangleSize(w.Key, font);
+                    var rectangle = layouter.PutNextRectangle(size);
+                    return new Word(rectangle, font, w.Key);
+                }))
+                .Then(words => imageDrawer.Draw(words));
         }
 
         private float GetFontSize(int wordCount, int maxCount)

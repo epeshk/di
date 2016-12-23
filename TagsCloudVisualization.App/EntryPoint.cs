@@ -25,7 +25,7 @@ namespace TagsCloudVisualization.App
             container.Register<ITagsCloudCreator, TagsCloudCreator>();
             container.Register<IStatisticsProvider, StatisticsProvider>();
             container.Register<StringMeasurer>(Lifestyle.Singleton);
-            container.RegisterCollection<IWordsPreprocessing>(new[] {typeof(RemoveShortWords), typeof(LowercaseWords)});
+            container.RegisterCollection<IWordsPreprocessing>(new[] {typeof(ExcludeWords), typeof(LowercaseWords)});
             container.RegisterCollection<IWordsSource>(new [] {typeof(TxtFileWordsSource)});
             container.RegisterCollection<IImageSaver>(new[] {typeof(PngImageSaver)});
             container.Register<IImageDrawer, ImageDrawer.ImageDrawer>();

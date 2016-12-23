@@ -3,6 +3,7 @@ namespace TagsCloudVisualization.Settings
     public class FileSettings
     {
         public string InputFile { get; set; } = "input.txt";
+        public string ExcludeWordsFile { get; set; } = "exclude.txt";
         public string OutputFile { get; set; } = "output.png";
     }
 }

@@ -18,8 +18,8 @@ namespace TagsCloudVisualization.ImageSaver
         public Result<None> TrySave(Image image)
         {
             if (!settings.OutputFile.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                return Result.Fail<None>("Not supported format");
-            return Result.OfAction(() => image.Save(settings.OutputFile, ImageFormat.Png));
+                return Result.Fail<None>("Can't save image. Not supported format");
+            return Result.OfAction(() => image.Save(settings.OutputFile, ImageFormat.Png), "Can't save image");
         }
     }
 }

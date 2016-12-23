@@ -90,6 +90,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="exclude.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

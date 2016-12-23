@@ -11,9 +11,11 @@ namespace ResultOf
 
 	public struct Result<T>
 	{
-		public Result(string error, T value = default(T))
+	    private string error;
+	    public Result(string error, T value = default(T), Exception innerException = null)
 		{
-			Error = error;
+	        InnerException = innerException;
+	        this.error = error;
 			Value = value;
 		}
 		public static implicit operator Result<T>(T v)
@@ -21,8 +23,11 @@ namespace ResultOf
 			return Result.Ok(v);
 		}
 
-		public string Error { get; }
+	    public string Error => InnerException == null ? error : $"{error}. {InnerException}";
 		internal T Value { get; }
+
+        public Exception InnerException { get; }
+
 		public T GetValueOrThrow()
 		{
 			if (IsSuccess) return Value;
@@ -47,9 +52,9 @@ namespace ResultOf
 			return Ok<None>(null);
 		}
 
-		public static Result<T> Fail<T>(string e)
+		public static Result<T> Fail<T>(string e, Exception innerException = null)
 		{
-			return new Result<T>(e);
+			return new Result<T>(e, default(T), innerException);
 		}
 
 		public static Result<T> Of<T>(Func<T> f, string error = null)
@@ -60,7 +65,7 @@ namespace ResultOf
 			}
 			catch (Exception e)
 			{
-				return Fail<T>(error ?? e.Message);
+				return Fail<T>(error ?? e.Message, e);
 			}
 		}
 
@@ -73,7 +78,7 @@ namespace ResultOf
 			}
 			catch (Exception e)
 			{
-				return Fail<None>(error ?? e.Message);
+				return Fail<None>(error ?? e.Message, e);
 			}
 		}
 
@@ -123,13 +128,10 @@ namespace ResultOf
 			return input.ReplaceError(err => errorMessage + ". " + err);
 		}
 
-		public static Result<TInput> FailOnNull<TInput>(
-			this Result<TInput> input,
-			string errorMessage)
+		public static Result<TOutput> ChangeType<TInput, TOutput>(
+			this Result<TInput> input)
 		{
-		    if (input.IsSuccess && input.Value != null)
-		        return input;
-		    return Fail<TInput>(errorMessage);
+			return new Result<TOutput>(input.Error, default(TOutput), input.InnerException);
 		}
 	}
 }

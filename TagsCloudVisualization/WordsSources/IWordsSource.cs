@@ -5,6 +5,6 @@ namespace TagsCloudVisualization.WordsSources
 {
     public interface IWordsSource
     {
-        Result<IEnumerable<string>> GetWords();
+        Result<IEnumerable<string>> GetWords(string fileName);
     }
 }
